@@ -10,34 +10,12 @@ const Products = () => {
   useEffect(() => {
     // Define the API endpoint
     const apiUrl = 'https://localhost:5261/api/Products';
-    const loginUrl = 'https://localhost:5261/api/Login/login';
-    const dataForLogin = {
-     "userName": "string",
-  "password": "string"
-    };
-    
-     // Make the API call using Axios
-     axios({      
-      url: loginUrl,        
-      method: 'POST',
-      data : JSON.stringify(dataForLogin),
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8', // Explicitly set the content type to JSON
-        'accept': '*/*',
-        'Access-Control-Allow-Origin':'*'
-        }
-      }
-    )
-    .then(response => {
-      console.log('Token ' , response.data.accessToken)
-      setLoading(false);  // Set loading to false once data is fetched
-            // Make the API call using Axios
           axios({      
             url: apiUrl,        
             method: 'GET',
             headers: {
               'accept': 'text/plain',
-              'Authorization': 'Bearer ' + response.data.accessToken,
+              'Authorization': 'Bearer ' + localStorage.getItem("site"),
               'Access-Control-Allow-Origin':'*'
             }
           }
@@ -49,13 +27,7 @@ const Products = () => {
         .catch(error => {
           setError(error.message);  // Set error state in case of failure
           setLoading(false);  // Set loading to false in case of error
-        });
-      
-    })
-    .catch(error => {
-      setError(error.message);  // Set error state in case of failure
-      setLoading(false);  // Set loading to false in case of error
-    });
+        });    
   }, []);  // Empty dependency array means this runs once when the component mounts
 
   if (loading) {
@@ -94,11 +66,7 @@ const Products = () => {
                 </tbody>
     </table>
            
-        </div>
-    // <div>
-    //   <h2>Fetched Data:</h2>
-    //   <pre>{JSON.stringify(data, null, 2)}</pre>
-    // </div>
+        </div>    
   );
 };
 
