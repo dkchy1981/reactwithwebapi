@@ -3,6 +3,7 @@ import './App.css';
 import MyComponent from './components/MyComponent/MyComponent'
 import Products from './components/Products/Products'
 import Login from './components/Login/Login'
+import NavBar from './components/NavBar/NavBar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import AuthProvider from "./AuthProvider";
@@ -22,8 +23,15 @@ function App() {
   };
   return (
     <div className="wrapper">
-      <h1>Application</h1>
-      <input type='button' onClick={Logout} value='Logout'></input>
+     <div class="d-flex" style={{"width":"100%"}}>
+          <div  style={{"width":"98%"}}>
+          <NavBar/>
+          </div>
+          <div class="ml-auto" style={{"width":"10%"}}>
+          <input type='button' onClick={Logout} value='Logout'></input>
+          </div>
+    </div>     
+      
       <BrowserRouter>
       <AuthProvider>
       <div className="App">
